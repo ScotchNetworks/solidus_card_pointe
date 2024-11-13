@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ['Daniele Palombo']
   spec.email = '387690+DanielePalombo@users.noreply.github.com'
 
-  spec.summary = 'TODO: Write a short summary, because RubyGems requires one.'
-  spec.description = 'TODO: Write a longer description or delete this line.'
+  spec.summary = 'A Solidus extension that integrates with the CardPointe payment gateway.'
+  spec.description = 'A Solidus extension that provides integration with the CardPointe payment gateway, allowing Solidus-based e-commerce applications to process payments securely and efficiently through CardPointe.'
   spec.homepage = 'https://github.com/solidusio-contrib/solidus_card_pointe#readme'
   spec.license = 'BSD-3-Clause'
 
