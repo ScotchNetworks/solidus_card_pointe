@@ -9,7 +9,9 @@ Gem::Specification.new do |spec|
   spec.email = '387690+DanielePalombo@users.noreply.github.com'
 
   spec.summary = 'A Solidus extension that integrates with the CardPointe payment gateway.'
+  # rubocop:disable Layout/LineLength
   spec.description = 'A Solidus extension that provides integration with the CardPointe payment gateway, allowing Solidus-based e-commerce applications to process payments securely and efficiently through CardPointe.'
+  # rubocop:enable Layout/LineLength
   spec.homepage = 'https://github.com/solidusio-contrib/solidus_card_pointe#readme'
   spec.license = 'BSD-3-Clause'
 
