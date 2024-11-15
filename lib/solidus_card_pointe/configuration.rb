@@ -2,20 +2,18 @@
 
 module SolidusCardPointe
   class Configuration
-    # Define here the settings for this extension, e.g.:
-    #
-    # attr_accessor :my_setting
-  end
+    attr_accessor :card_pointe_merchant_id, :card_pointe_authorization, :card_pointe_url
 
-  class << self
-    def configuration
-      @configuration ||= Configuration.new
-    end
+    class << self
+      def configuration
+        @configuration ||= Configuration.new
+      end
 
-    alias config configuration
+      alias config configuration
 
-    def configure
-      yield configuration
+      def configure
+        yield configuration
+      end
     end
   end
 end
