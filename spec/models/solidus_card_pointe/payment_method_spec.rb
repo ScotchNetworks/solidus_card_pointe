@@ -30,8 +30,20 @@ RSpec.describe SolidusCardPointe::PaymentMethod do
       expect(payment_method.has_preference?(:card_pointe_authorization)).to be true
     end
 
-    it 'has a url preference' do
-      expect(payment_method.has_preference?(:card_pointe_url)).to be true
+    it 'has a domain preference' do
+      expect(payment_method.has_preference?(:card_pointe_domain)).to be true
+    end
+
+    it 'returns the correct site for test server' do
+      payment_method.preferred_server = 'test'
+      payment_method.preferred_card_pointe_domain = 'example'
+      expect(payment_method.preferred_card_pointe_site).to eq('example-uat')
+    end
+
+    it 'returns the correct site for live server' do
+      payment_method.preferred_server = 'live'
+      payment_method.preferred_card_pointe_domain = 'example'
+      expect(payment_method.preferred_card_pointe_site).to eq('example')
     end
   end
 end

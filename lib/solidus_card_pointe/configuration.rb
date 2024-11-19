@@ -2,7 +2,7 @@
 
 module SolidusCardPointe
   class Configuration
-    attr_accessor :card_pointe_merchant_id, :card_pointe_authorization, :card_pointe_url
+    attr_accessor :card_pointe_merchant_id, :card_pointe_authorization, :card_pointe_domain
 
     class << self
       def configuration
