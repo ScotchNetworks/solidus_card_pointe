@@ -20,6 +20,10 @@ module SolidusCardPointe
           ::SolidusCardPointe::Engine.card_pointe_credentials_hash
         )
       end
+
+      Spree::PermittedAttributes.source_attributes.concat(%i[
+        card_token
+      ])
     end
 
     class << self
