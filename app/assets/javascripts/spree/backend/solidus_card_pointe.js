@@ -46,8 +46,8 @@ const updateOrder = async (paymentMethodId, token, orderNumber, orderToken) => {
         })
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+    .then(() => {
+        window.location.href = `/admin/orders/${orderNumber}/payments`
     })
     .catch((error) => {
         console.error('Error:', error);
