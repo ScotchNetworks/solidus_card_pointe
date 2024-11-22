@@ -1,0 +1,15 @@
+<div id="card-pointe-container"
+    data-payment-method-id="<%= payment_method.id %>"
+    data-card-pointe-site="<%= payment_method.preferred_card_pointe_site %>"
+    data-order-number="<%= @order.number %>"
+    data-order-token="<%= @order.guest_token %>"
+    
+></div>
+<legend align="center"><%= ::SolidusCardPointe::PaymentMethod.model_name.human %></legend>
+<form name="tokenform" id="tokenform">
+    <iFrame id="tokenFrame" name="tokenFrame" src="<%= "https://#{payment_method.preferred_card_pointe_site}.cardconnect.com/itoke/ajax-tokenizer.html?useexpiry=true&usecvv=true&formatinput=true" %>" frameborder="0" scrolling="no" class="mx-auto"></iFrame>
+    <input type="hidden" name="mytoken" id="mytoken"/>
+</form>
+
+
+
