@@ -31,7 +31,7 @@ module SolidusCardPointe
         {
           card_pointe_authorization: ENV['CARD_POINTE_AUTHORIZATION'],
           card_pointe_merchant_id: ENV['CARD_POINTE_MERCHANT_ID'],
-          card_pointe_domain: ENV['CARD_POINT_DOMAIN']
+          card_pointe_domain: ENV['CARD_POINTE_DOMAIN']
         }
       end
     end
