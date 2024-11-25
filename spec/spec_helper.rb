@@ -5,6 +5,8 @@ ENV['RAILS_ENV'] = 'test'
 
 # Run Coverage report
 require 'solidus_dev_support/rspec/coverage'
+require 'vcr'
+require 'webmock/rspec'
 
 # Create the dummy app if it's still missing.
 dummy_env = "#{__dir__}/dummy/config/environment.rb"
