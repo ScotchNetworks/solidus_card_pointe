@@ -60,5 +60,31 @@ module SolidusCardPointe
         expect(response).not_to be_success
       end
     end
+
+    describe '#capture' do
+      it 'returns a successful response when capture is approved' do
+        capture_service = instance_double(CardPointe::Transactions::CaptureService)
+        allow(CardPointe::Transactions::CaptureService).to receive(:new).and_return(capture_service)
+        allow(capture_service).to receive(:call).and_return('retref' => '54321')
+        response = gateway.capture(1000, 'authorization_code', gateway_options)
+        expect(response).to be_success
+      end
+
+      it 'returns the correct capture code when capture is approved' do
+        capture_service = instance_double(CardPointe::Transactions::CaptureService)
+        allow(CardPointe::Transactions::CaptureService).to receive(:new).and_return(capture_service)
+        allow(capture_service).to receive(:call).and_return('retref' => '54321')
+        response = gateway.capture(1000, 'authorization_code', gateway_options)
+        expect(response.authorization).to eq('54321')
+      end
+
+      it 'returns a failed response when an error occurs' do
+        capture_service = instance_double(CardPointe::Transactions::CaptureService)
+        allow(CardPointe::Transactions::CaptureService).to receive(:new).and_return(capture_service)
+        allow(capture_service).to receive(:call).and_raise(StandardError.new('Capture error'))
+        response = gateway.capture(1000, 'authorization_code', gateway_options)
+        expect(response).not_to be_success
+      end
+    end
   end
 end

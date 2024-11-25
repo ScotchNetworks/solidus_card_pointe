@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/capture
+    body:
+      encoding: UTF-8
+      string: '{"merchid":"<MERCHANT_ID>","amount":"100.0","currency":"USD","retref":"123456789"}'
+    headers:
+      Authorization:
+      - "<AUTHORIZATION>"
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      Content-Security-Policy:
+      - default-src 'self'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '125'
+      Date:
+      - Mon, 25 Nov 2024 21:05:46 GMT
+      Set-Cookie:
+      - 2f4803=v/9hkb3mNKax8auqyn+Q9bSA5PW9uL+ABCzZQ7HFV7VOR+JPRMw+pVd3mRuZaROCg1u4yQKBRCMnS9z9yo/yFmfirW/sZw2XiKvYnwSD8DFjFkaRma7MSXDfv35wJGGxk/Xg0Qf7UYlbUAL6ZtWI2N4U7zdojERVYqRfGli+p6gpkbOU;
+        path=/
+      - BIGipServerphu-smb-vip_1500=!WNyUxRGeg1YySeC+E70Toal7hX3xbCsH6ochQXVHS5dfinzpGy51XYHDU9yK6r+N1sFOPxvAMxQHVY8=;
+        path=/; Httponly; Secure
+      - TS01dc4fc6=018d1dc28b2633fee9fa2425bd35b8bc2c30661b83747cb90592be27ab78ac518428cd1b37f7be437d14bc793dbf7dd7724a0d75b6;
+        Path=/; Secure; HttpOnly; SameSite=Strict;
+      Vary:
+      - Accept-Encoding
+      X-Envoy-Upstream-Service-Time:
+      - '488'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Volterra-Location:
+      - md2-mad
+    body:
+      encoding: UTF-8
+      string: '{"respproc":"PPS","resptext":"Txn not found","retref":"123456789","respstat":"C","respcode":"29","batchid":"-1","account":""}'
+  recorded_at: Mon, 25 Nov 2024 21:05:47 GMT
+recorded_with: VCR 6.3.1
