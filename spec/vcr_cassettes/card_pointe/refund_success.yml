@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/refund
+    body:
+      encoding: UTF-8
+      string: '{"merchid":"<MERCHANT_ID>","retref":"123456789","amount":"100.0"}'
+    headers:
+      Authorization:
+      - "<AUTHORIZATION>"
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      Content-Security-Policy:
+      - default-src 'self'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '97'
+      Date:
+      - Tue, 26 Nov 2024 17:55:46 GMT
+      Set-Cookie:
+      - 2f4803=+/mVdbMAk3EHi8c3k1EraHCKQFXjPSfj5VFVojTV85luORm4Ypz/5fo9WOU9wA6Gje3WbsSF9s3AwA3lkjrZ24SjQ7QFx11CcE/hKUt1lyPHMfUzBMNg4q/tZqPwdwVhKEq+bx7C2wAJo3SBQxMrg/wN+uIZGZUh86i6u6XU1+5SO1yT;
+        path=/
+      - BIGipServerphu-smb-vip_1500=!bplwbL2dVXAW7QG+E70Toal7hX3xbI991G8GIM3Z8di1DuzUiO6PoXF6MdvorKVAzmPAUY82+p7/aJo=;
+        path=/; Httponly; Secure
+      - TS01dc4fc6=018d1dc28bc338c789a98b90023eee2acd9b00843c7261208c44fa8ab46f474fe4a8945c84ca5683644aead92b1fce6b46f8619a6d;
+        Path=/; Secure; HttpOnly; SameSite=Strict;
+      Vary:
+      - Accept-Encoding
+      X-Envoy-Upstream-Service-Time:
+      - '487'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Volterra-Location:
+      - md2-mad
+    body:
+      encoding: UTF-8
+      string: '{"respproc":"PPS","resptext":"Txn not found","retref":"123456789","respcode":"29","respstat":"C"}'
+  recorded_at: Tue, 26 Nov 2024 17:55:46 GMT
+recorded_with: VCR 6.3.1

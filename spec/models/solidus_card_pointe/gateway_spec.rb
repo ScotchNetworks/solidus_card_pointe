@@ -112,5 +112,36 @@ module SolidusCardPointe
         expect(response).not_to be_success
       end
     end
+
+    describe '#credit' do
+      let(:payment) { create(:payment, order: order, source: payment_source, amount: 1000) }
+      let(:gateway_options) {
+        { order_id: "#{order.number}-123", originator: create(:refund, payment: payment) }
+      }
+
+      it 'returns a successful response when credit is approved' do
+        credit_service = instance_double(CardPointe::Transactions::RefundService)
+        allow(CardPointe::Transactions::RefundService).to receive(:new).and_return(credit_service)
+        allow(credit_service).to receive(:call).and_return('retref' => '11223')
+        response = gateway.credit(1000, 'response_code', gateway_options)
+        expect(response).to be_success
+      end
+
+      it 'returns the correct credit code when credit is approved' do
+        credit_service = instance_double(CardPointe::Transactions::RefundService)
+        allow(CardPointe::Transactions::RefundService).to receive(:new).and_return(credit_service)
+        allow(credit_service).to receive(:call).and_return('retref' => '11223')
+        response = gateway.credit(1000, 'response_code', gateway_options)
+        expect(response.authorization).to eq('11223')
+      end
+
+      it 'returns a failed response when an error occurs' do
+        credit_service = instance_double(CardPointe::Transactions::RefundService)
+        allow(CardPointe::Transactions::RefundService).to receive(:new).and_return(credit_service)
+        allow(credit_service).to receive(:call).and_raise(StandardError.new('Credit error'))
+        response = gateway.credit(1000, 'response_code', gateway_options)
+        expect(response).not_to be_success
+      end
+    end
   end
 end
