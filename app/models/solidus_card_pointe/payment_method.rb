@@ -23,5 +23,11 @@ module SolidusCardPointe
     def preferred_card_pointe_site
       preferred_server == 'test' ? preferred_card_pointe_domain + UAT_URL_EXTENSION : preferred_card_pointe_domain
     end
+
+    def try_void(payment)
+      return false unless payment.source.can_void?(payment)
+
+      gateway.void(payment.response_code, originator: payment)
+    end
   end
 end

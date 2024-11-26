@@ -86,5 +86,31 @@ module SolidusCardPointe
         expect(response).not_to be_success
       end
     end
+
+    describe '#void' do
+      it 'returns a successful response when void is approved' do
+        void_service = instance_double(CardPointe::Transactions::VoidService)
+        allow(CardPointe::Transactions::VoidService).to receive(:new).and_return(void_service)
+        allow(void_service).to receive(:call).and_return('retref' => '98765')
+        response = gateway.void('response_code', gateway_options)
+        expect(response).to be_success
+      end
+
+      it 'returns the correct void code when void is approved' do
+        void_service = instance_double(CardPointe::Transactions::VoidService)
+        allow(CardPointe::Transactions::VoidService).to receive(:new).and_return(void_service)
+        allow(void_service).to receive(:call).and_return('retref' => '98765')
+        response = gateway.void('response_code', gateway_options)
+        expect(response.authorization).to eq('98765')
+      end
+
+      it 'returns a failed response when an error occurs' do
+        void_service = instance_double(CardPointe::Transactions::VoidService)
+        allow(CardPointe::Transactions::VoidService).to receive(:new).and_return(void_service)
+        allow(void_service).to receive(:call).and_raise(StandardError.new('Void error'))
+        response = gateway.void('response_code', gateway_options)
+        expect(response).not_to be_success
+      end
+    end
   end
 end

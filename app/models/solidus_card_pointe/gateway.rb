@@ -60,6 +60,23 @@ module SolidusCardPointe
       ActiveMerchant::Billing::Response.new(false, e, {})
     end
 
+    def void(_response_code, gateway_options)
+      payment = gateway_options[:originator]
+      payment_method = payment.payment_method
+      transaction_reference = payment.response_code
+      amount = payment.amount
+
+      void_response = CardPointe::Transactions::VoidService.new(
+        payment_method,
+        transaction_reference,
+        amount
+      ).call
+
+      ActiveMerchant::Billing::Response.new(true, 'Transaction voided', {}, authorization: void_response['retref'])
+    rescue StandardError => e
+      ActiveMerchant::Billing::Response.new(false, e, {})
+    end
+
     private
 
     def fetch_spree_order(order_number)
