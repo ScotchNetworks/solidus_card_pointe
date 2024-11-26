@@ -77,6 +77,21 @@ module SolidusCardPointe
       ActiveMerchant::Billing::Response.new(false, e, {})
     end
 
+    def credit(float_amount, response_code, gateway_options)
+      payment = gateway_options[:originator].payment
+      payment_method = payment.payment_method
+
+      credit_response = CardPointe::Transactions::RefundService.new(
+        payment_method,
+        float_amount,
+        response_code
+      ).call
+
+      ActiveMerchant::Billing::Response.new(true, 'Transaction credited', {}, authorization: credit_response['retref'])
+    rescue StandardError => e
+      ActiveMerchant::Billing::Response.new(false, e, {})
+    end
+
     private
 
     def fetch_spree_order(order_number)
