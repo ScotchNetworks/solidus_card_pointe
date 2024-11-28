@@ -28,9 +28,9 @@ module SolidusCardPointe
 
       capture_response = CardPointe::Transactions::CaptureService.new(
         payment_method,
+        payment_source,
         float_amount,
         currency,
-        payment.number,
       ).call
 
       ActiveMerchant::Billing::Response.new(

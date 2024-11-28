@@ -3,10 +3,10 @@
 module CardPointe
   module Transactions
     class CaptureService < CardPointe::Transactions::BaseService
-      def initialize(payment_method, amount, currency, transaction_reference)
+      def initialize(payment_method, payment_source, amount, currency)
         @amount = amount
         @currency = currency
-        @retref = transaction_reference
+        @payment_source = payment_source
         super(payment_method)
       end
 
@@ -17,13 +17,14 @@ module CardPointe
       private
 
       def capture
-        url = "#{card_pointe_url}/capture"
+        url = "#{card_pointe_url}/auth"
 
         body = {
           merchid: card_pointe_merchant_id,
           amount: @amount.to_s,
+          account: @payment_source.card_token,
           currency: @currency,
-          retref: @retref,
+          capture: 'Y',
         }
 
         headers = {
