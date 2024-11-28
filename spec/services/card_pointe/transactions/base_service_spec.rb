@@ -30,15 +30,34 @@ RSpec.describe CardPointe::Transactions::BaseService, type: :service do
   end
 
   describe '#handle_response' do
-    let(:success_result) { instance_double('Result', success?: true, parsed_response: { 'status' => 'approved' }) }
-    let(:failure_result) { instance_double('Result', success?: false) }
+    context 'when response status is ok' do
+      let(:success_result) { instance_double('Result', success?: true, parsed_response: { 'respstat' => 'A' }) }
+      let(:failure_result) {
+        instance_double('Result', success?: true,
+          parsed_response: { 'respstat' => 'C', 'resptext' => 'wrong attribute' })
+      }
 
-    it 'returns parsed response if result is successful' do
-      expect(service.send(:handle_response, success_result)).to eq({ 'status' => 'approved' })
+      it 'returns parsed response if transaction is approved' do
+        expect(service.send(:handle_response, success_result)).to eq({ 'respstat' => 'A' })
+      end
+
+      it 'calls handle_error if transaction is not approved' do
+        allow(service).to receive(:handle_error).with(failure_result).and_return('wrong attribute')
+        service.send(:handle_response, failure_result)
+        expect(service).to have_received(:handle_error).with(failure_result)
+      end
     end
 
-    it 'raises an error if result is not successful' do
-      expect { service.send(:handle_response, failure_result) }.to raise_error(StandardError)
+    context 'when response status is not success' do
+      let(:failure_result) {
+        instance_double('Result', success?: false, parsed_response: nil, response: { 'message' => 'Unauthorized' })
+      }
+
+      it 'raises a StandardError if an error occurs' do
+        allow(service).to receive(:handle_response).and_call_original
+        allow(service).to receive(:handle_response).with(failure_result).and_raise(StandardError, 'StandardError')
+        expect { service.send(:handle_response, failure_result) }.to raise_error(StandardError, 'StandardError')
+      end
     end
   end
 end
