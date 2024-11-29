@@ -2,29 +2,26 @@
 
 module CardPointe
   module Transactions
-    class CaptureService < CardPointe::Transactions::BaseService
-      def initialize(payment_method, payment_source, amount, currency)
+    class VoidService < CardPointe::Transactions::BaseService
+      def initialize(payment_method, transaction_reference, amount)
+        @retref = transaction_reference
         @amount = amount
-        @currency = currency
-        @payment_source = payment_source
         super(payment_method)
       end
 
       def call
-        capture
+        void
       end
 
       private
 
-      def capture
-        url = "#{card_pointe_url}/auth"
+      def void
+        url = "#{card_pointe_url}/void"
 
         body = {
           merchid: card_pointe_merchant_id,
-          amount: @amount.to_s,
-          account: @payment_source.card_token,
-          currency: @currency,
-          capture: 'Y',
+          retref: @retref,
+          amount: @amount.to_i.to_s
         }
 
         headers = {

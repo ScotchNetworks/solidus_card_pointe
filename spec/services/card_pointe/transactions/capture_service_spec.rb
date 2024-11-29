@@ -4,9 +4,11 @@ RSpec.describe CardPointe::Transactions::CaptureService, :vcr do
   let(:amount) { 100.0 }
   let(:currency) { 'USD' }
   let(:payment_method) { FactoryBot.create(:card_pointe_payment_method) }
-  let(:transaction_reference) { '123456789' }
+  let(:payment_source) {
+    instance_double('PaymentSource', payment_method: payment_method, card_token: '9477257372660010')
+  }
 
-  let(:service) { described_class.new(payment_method, amount, currency, transaction_reference) }
+  let(:service) { described_class.new(payment_method, payment_source, amount, currency) }
 
   describe '#call' do
     context 'when the capture request is successful' do

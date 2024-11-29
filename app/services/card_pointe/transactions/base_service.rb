@@ -24,9 +24,20 @@ module CardPointe
       end
 
       def handle_response(result)
-        return result.parsed_response if result.success?
+        if result.success?
+          result.parsed_response['respstat'] != 'A' ? handle_error(result) : result.parsed_response
+        else
+          handle_error(result)
+        end
+      end
 
-        raise StandardError, result
+      def handle_error(result)
+        error_message = if result.parsed_response
+                          result.parsed_response['resptext']
+                        else
+                          result.response.message
+                        end
+        raise StandardError, error_message
       end
     end
   end

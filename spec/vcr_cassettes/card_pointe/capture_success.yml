@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/capture
+    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/auth
     body:
       encoding: UTF-8
-      string: '{"merchid":"<MERCHANT_ID>","amount":"100.0","currency":"USD","retref":"123456789"}'
+      string: '{"merchid":"<MERCHANT_ID>","amount":"100.0","account":"9477257372660010","currency":"USD","capture":"Y"}'
     headers:
       Authorization:
       - "<AUTHORIZATION>"
@@ -35,26 +35,26 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '125'
+      - '324'
       Date:
-      - Mon, 25 Nov 2024 21:05:46 GMT
+      - Thu, 28 Nov 2024 13:48:23 GMT
       Set-Cookie:
-      - 2f4803=v/9hkb3mNKax8auqyn+Q9bSA5PW9uL+ABCzZQ7HFV7VOR+JPRMw+pVd3mRuZaROCg1u4yQKBRCMnS9z9yo/yFmfirW/sZw2XiKvYnwSD8DFjFkaRma7MSXDfv35wJGGxk/Xg0Qf7UYlbUAL6ZtWI2N4U7zdojERVYqRfGli+p6gpkbOU;
+      - 2f4803=WmVLhqSuWbYjiWCwhskaw5zn9Z80wNclmtr3NGzSeDwx7q6su5AIASIEC/Cc6VZddT0AwU0An+jaKowVgoVyE/TqOpNDkLV6DI+cOUzPYhXnf6CvAukt81npOPlhNkPcVlNxtK/TLo6m1ibzYcvsmsx3IHwrTV6aeqJMNPLqGPgumCNU;
         path=/
-      - BIGipServerphu-smb-vip_1500=!WNyUxRGeg1YySeC+E70Toal7hX3xbCsH6ochQXVHS5dfinzpGy51XYHDU9yK6r+N1sFOPxvAMxQHVY8=;
+      - BIGipServerphu-smb-vip_1500=!H9KjLkkDop2hWkS+E70Toal7hX3xbCL0wjIHyT8HuMHYw1nXYE0sfpvuMPXrdURZjEJpfpmrTjh+bqQ=;
         path=/; Httponly; Secure
-      - TS01dc4fc6=018d1dc28b2633fee9fa2425bd35b8bc2c30661b83747cb90592be27ab78ac518428cd1b37f7be437d14bc793dbf7dd7724a0d75b6;
+      - TS01dc4fc6=0197bd957f2e09b0799582d0f59c0d75235f3402868e9f40f61299c6910fa3a2c44fc34063c7c443cac227264ad128294a6525ed0b;
         Path=/; Secure; HttpOnly; SameSite=Strict;
       Vary:
       - Accept-Encoding
       X-Envoy-Upstream-Service-Time:
-      - '488'
+      - '334'
       Strict-Transport-Security:
       - max-age=31536000
       X-Volterra-Location:
       - md2-mad
     body:
       encoding: UTF-8
-      string: '{"respproc":"PPS","resptext":"Txn not found","retref":"123456789","respstat":"C","respcode":"29","batchid":"-1","account":""}'
-  recorded_at: Mon, 25 Nov 2024 21:05:47 GMT
+      string: '{"amount":"100.00","resptext":"Approval","commcard":"N","cvvresp":"M","respcode":"000","batchid":"194","avsresp":"Y","entrymode":"Keyed","merchid":"<MERCHANT_ID>","token":"9477257372660010","authcode":"PPS373","respproc":"RPCT","bintype":"","expiry":"0534","retref":"333538031704","respstat":"A","account":"9477257372660010"}'
+  recorded_at: Thu, 28 Nov 2024 13:48:24 GMT
 recorded_with: VCR 6.3.1

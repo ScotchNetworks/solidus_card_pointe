@@ -4,7 +4,7 @@ RSpec.describe CardPointe::Transactions::AuthorizeService, :vcr do
   let(:order) { create(:order, total: 100.0, currency: 'USD') }
   let(:payment_method) { FactoryBot.create(:card_pointe_payment_method) }
   let(:payment_source) {
-    instance_double('PaymentSource', payment_method: payment_method, card_token: '4111111111111111')
+    instance_double('PaymentSource', payment_method: payment_method, card_token: '9418594164541111')
   }
 
   let(:service) { described_class.new(order, payment_source, payment_method) }

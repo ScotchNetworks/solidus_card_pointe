@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/auth
+    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/void
     body:
       encoding: UTF-8
-      string: '{"merchid":"<MERCHANT_ID>","amount":"100.0","account":"9477257372660010","currency":"USD","capture":"Y"}'
+      string: '{"merchid":"<MERCHANT_ID>","retref":"333963034628","amount":"36"}'
     headers:
       Authorization:
       - "<AUTHORIZATION>"
@@ -19,8 +19,8 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 401
-      message: Unauthorized
+      code: 200
+      message: OK
     headers:
       X-Content-Type-Options:
       - nosniff
@@ -32,29 +32,29 @@ http_interactions:
       - no-cache
       X-Frame-Options:
       - DENY
-      Www-Authenticate:
-      - Basic
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
-      - '0'
+      - '176'
       Date:
-      - Thu, 28 Nov 2024 13:51:01 GMT
+      - Thu, 28 Nov 2024 14:38:09 GMT
       Set-Cookie:
-      - 2f4803=DknWkOh9grXHJ/j9hSyE//DBDvsZB6NO1yfUhMgTD2WcssnYracVJalWVJecuDUP//+GJbupruXEt6tbFAKHURaOvi+kBAJODcC4TN1lw5+Qzl68R8ykET00gtNMhH7v3fwTyDsJpARMJO2S0+Rng6qBognVl13lOp9Pk3ghcEMCgL7W;
+      - 2f4803=gGPiyQ/cwlGGcNLFY98o6q0PGoPx3J0qr5nCREzU+/lO4cscLL6C/2KktgCNyv81Y2mPTaz80fiGz6RViDX3WuB2TuT22nB2YZzQKnwi5J/x+P+NfbI0NBop9IEDmipKMmpiXdTWRBrnykPRAJGx3DZ9Ml+v91VTugrlEayaUzdtcjCK;
         path=/
-      - BIGipServerphu-smb-vip_1500=!qNmQYV1L2zsY3Au+E70Toal7hX3xbJlfybQPlIfQn/2h8SQ4obmvLdxEZNQzAK8LCzS4TZAcR5HMplE=;
+      - BIGipServerphu-smb-vip_1500=!1cc6vVqmhw3UP1C+E70Toal7hX3xbC5aH8st5kmemKT1fpX1TtbdjsMrQtSyGvb9Ga3aIYOgS09n+3I=;
         path=/; Httponly; Secure
-      - TS01dc4fc6=015a3463ff11094db453469dc398a9cd2a6be461ef9774b08c7396b9dfbd2b402e7e5849f8eac8a1fe1f1060212944806afbbeaa82;
+      - TS01dc4fc6=01cb89ce46e95c728cea58a7fb539e6a82bbf1e9aa6b3e4481d8fd910497c65021260ab28f21173a6d50c85ea5d162ce1cb2796633;
         Path=/; Secure; HttpOnly; SameSite=Strict;
+      Vary:
+      - Accept-Encoding
       X-Envoy-Upstream-Service-Time:
-      - '284'
+      - '348'
       Strict-Transport-Security:
       - max-age=31536000
       X-Volterra-Location:
       - md2-mad
     body:
       encoding: UTF-8
-      string: ''
-  recorded_at: Thu, 28 Nov 2024 13:51:02 GMT
+      string: '{"authcode":"REVERS","respproc":"RPCT","amount":"29.63","resptext":"Approval","currency":"USD","retref":"333963034628","respstat":"A","respcode":"000","merchid":"<MERCHANT_ID>"}'
+  recorded_at: Thu, 28 Nov 2024 14:38:10 GMT
 recorded_with: VCR 6.3.1

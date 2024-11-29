@@ -28,9 +28,9 @@ module SolidusCardPointe
 
       capture_response = CardPointe::Transactions::CaptureService.new(
         payment_method,
+        payment_source,
         float_amount,
         currency,
-        payment.number,
       ).call
 
       ActiveMerchant::Billing::Response.new(
@@ -56,6 +56,38 @@ module SolidusCardPointe
 
       ActiveMerchant::Billing::Response.new(true, 'Transaction approved', payment_source.attributes,
         authorization: authorization_response['retref'])
+    rescue StandardError => e
+      ActiveMerchant::Billing::Response.new(false, e, {})
+    end
+
+    def void(_response_code, gateway_options)
+      payment = gateway_options[:originator]
+      payment_method = payment.payment_method
+      transaction_reference = payment.response_code
+      amount = payment.amount
+
+      void_response = CardPointe::Transactions::VoidService.new(
+        payment_method,
+        transaction_reference,
+        amount
+      ).call
+
+      ActiveMerchant::Billing::Response.new(true, 'Transaction voided', {}, authorization: void_response['retref'])
+    rescue StandardError => e
+      ActiveMerchant::Billing::Response.new(false, e, {})
+    end
+
+    def credit(float_amount, response_code, gateway_options)
+      payment = gateway_options[:originator].payment
+      payment_method = payment.payment_method
+
+      credit_response = CardPointe::Transactions::RefundService.new(
+        payment_method,
+        float_amount,
+        response_code
+      ).call
+
+      ActiveMerchant::Billing::Response.new(true, 'Transaction credited', {}, authorization: credit_response['retref'])
     rescue StandardError => e
       ActiveMerchant::Billing::Response.new(false, e, {})
     end

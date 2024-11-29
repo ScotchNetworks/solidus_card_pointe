@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/auth
+    uri: https://fts-uat.cardconnect.com:6443/cardconnect/rest/refund
     body:
       encoding: UTF-8
-      string: '{"merchid":"<MERCHANT_ID>","amount":"100.0","account":"9477257372660010","currency":"USD","capture":"Y"}'
+      string: '{"merchid":"<MERCHANT_ID>","retref":"333359735403","amount":"36"}'
     headers:
       Authorization:
       - "<AUTHORIZATION>"
@@ -39,16 +39,16 @@ http_interactions:
       Content-Length:
       - '0'
       Date:
-      - Thu, 28 Nov 2024 13:51:01 GMT
+      - Thu, 28 Nov 2024 14:51:10 GMT
       Set-Cookie:
-      - 2f4803=DknWkOh9grXHJ/j9hSyE//DBDvsZB6NO1yfUhMgTD2WcssnYracVJalWVJecuDUP//+GJbupruXEt6tbFAKHURaOvi+kBAJODcC4TN1lw5+Qzl68R8ykET00gtNMhH7v3fwTyDsJpARMJO2S0+Rng6qBognVl13lOp9Pk3ghcEMCgL7W;
+      - 2f4803=gNxyl66g0hGBv1IXwS2tP5Dx30cazgX0TRHI5Sq+vZV5HEqhkJc59Z94as9fJxtsrQbQ6c+OufaidcRu55t3WVIbDrwfv6Zk7CPsgh0JzLHEbd0Nrhw5DAkcPBPPbeK38Qri2B5ZUwYyGsLZoWhcfTjstQL2C7ezt3IicTVz/jLY3wWy;
         path=/
-      - BIGipServerphu-smb-vip_1500=!qNmQYV1L2zsY3Au+E70Toal7hX3xbJlfybQPlIfQn/2h8SQ4obmvLdxEZNQzAK8LCzS4TZAcR5HMplE=;
+      - BIGipServerphu-smb-vip_1500=!oKTlFlfyUrFOTHm+E70Toal7hX3xbNqvSluylkb51YpdVpVkG7mUK6mRiynKgoorglup020iT5aCe9Q=;
         path=/; Httponly; Secure
-      - TS01dc4fc6=015a3463ff11094db453469dc398a9cd2a6be461ef9774b08c7396b9dfbd2b402e7e5849f8eac8a1fe1f1060212944806afbbeaa82;
+      - TS01dc4fc6=01bb95f1c7e19ffdafc9753a1b6326b482fe5e741787607359d68a8c6248d7d6f8b0159a2638266971d5a438a8e1cefe8a8d0a7ea7;
         Path=/; Secure; HttpOnly; SameSite=Strict;
       X-Envoy-Upstream-Service-Time:
-      - '284'
+      - '486'
       Strict-Transport-Security:
       - max-age=31536000
       X-Volterra-Location:
@@ -56,5 +56,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Thu, 28 Nov 2024 13:51:02 GMT
+  recorded_at: Thu, 28 Nov 2024 14:51:11 GMT
 recorded_with: VCR 6.3.1
