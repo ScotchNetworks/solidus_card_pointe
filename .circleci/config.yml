@@ -15,6 +15,7 @@ jobs:
     executor:
       name: solidusio_extensions/sqlite
       ruby_version: '3.1'
+    context: card_pointe
     steps:
       - browser-tools/install-chrome
       - solidusio_extensions/run-tests
@@ -22,6 +23,7 @@ jobs:
     executor:
       name: solidusio_extensions/postgres
       ruby_version: '3.1'
+    context: card_pointe
     steps:
       - browser-tools/install-chrome
       - solidusio_extensions/run-tests
@@ -29,6 +31,7 @@ jobs:
     executor:
       name: solidusio_extensions/mysql
       ruby_version: '3.1'
+    context: card_pointe
     steps:
       - browser-tools/install-chrome
       - solidusio_extensions/run-tests
