@@ -20,7 +20,7 @@ module CardPointe
       end
 
       def card_pointe_authorization
-        @payment_method.preferred_card_pointe_authorization
+        "Basic #{@payment_method.preferred_card_pointe_authorization}"
       end
 
       def handle_response(result)

@@ -25,7 +25,7 @@ RSpec.describe CardPointe::Transactions::BaseService, type: :service do
 
   describe '#card_pointe_authorization' do
     it 'returns the correct authorization token' do
-      expect(service.send(:card_pointe_authorization)).to eq('auth_token')
+      expect(service.send(:card_pointe_authorization)).to eq('Basic auth_token')
     end
   end
 
