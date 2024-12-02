@@ -1,0 +1,22 @@
+<% if @payment.payment_method.is_a?(SolidusCardPointe::PaymentMethod) %>
+  <table class="index" id="listing_card_pointe_log_entries">
+    <thead>
+      <tr>
+        <th><%= Spree::LogEntry.human_attribute_name(:created_at) %></th>
+        <th><%= Spree::LogEntry.human_attribute_name(:details) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payment.log_entries.each do |entry| %>
+        <tr>
+          <td><%= pretty_time(entry.created_at) %></td>
+          <td>
+            <pre><%= entry.parsed_details.message %></pre>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= render partial: 'spree/admin/payments/log_entries', locals: { payment: payment } %>
+<% end %> 
