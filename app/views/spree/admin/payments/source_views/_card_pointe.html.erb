@@ -1,0 +1,7 @@
+<% formatted_card_number = "#{@payment.source.card_token[1..2]}XX-XXXX-XXXX-#{@payment.source.card_last4}" %>
+
+<div>
+    <legend align="center"> <%= ::SolidusCardPointe::PaymentMethod.model_name.human %></legend>
+    <p>Card Number: <b><%= formatted_card_number %></b></p>
+    <p>Card Type: <b><%= @payment.source.card_type %></b></p>
+</div>
