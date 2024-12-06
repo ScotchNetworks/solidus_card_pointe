@@ -22,7 +22,9 @@ window.addEventListener('message', async function(event) {
     }
     var mytoken = document.getElementById('mytoken');
     mytoken.value = token.message;
-    updateOrder(paymentMethodId, mytoken, orderNumber, orderToken);
+    alert('Tokenizing the card, please wait...');
+    await updateOrder(paymentMethodId, mytoken, orderNumber, orderToken);
+    alert('Card Tokenized successfully!');
 }, false);
 
 const updateOrder = async (paymentMethodId, token, orderNumber, orderToken) => {
