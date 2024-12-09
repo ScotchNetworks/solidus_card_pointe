@@ -46,4 +46,29 @@ RSpec.describe SolidusCardPointe::PaymentMethod do
       expect(payment_method.preferred_card_pointe_site).to eq('example')
     end
   end
+
+  describe '#reusable_sources' do
+    let(:reusable_payment_source) {
+      instance_double(SolidusCardPointe::PaymentSource, reusable?: true, payment_method: payment_method)
+    }
+    let(:non_reusable_payment_source) { instance_double(SolidusCardPointe::PaymentSource, reusable?: false) }
+    let(:other_payment_method) { instance_double(described_class) }
+    let(:other_payment_source) {
+      instance_double(SolidusCardPointe::PaymentSource, reusable?: true, payment_method: other_payment_method)
+    }
+    let(:wallet) { instance_double(Spree::Wallet) }
+    let(:order) { instance_double(Spree::Order, user: instance_double(Spree::User, wallet: wallet)) }
+
+    before do
+      allow(wallet).to receive(:wallet_payment_sources).and_return([
+        instance_double(Spree::WalletPaymentSource, payment_source: reusable_payment_source),
+        instance_double(Spree::WalletPaymentSource, payment_source: non_reusable_payment_source),
+        instance_double(Spree::WalletPaymentSource, payment_source: other_payment_source)
+      ])
+    end
+
+    it 'returns only reusable sources of the same payment method' do
+      expect(payment_method.reusable_sources(order)).to contain_exactly(reusable_payment_source)
+    end
+  end
 end
