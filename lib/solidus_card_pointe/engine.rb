@@ -26,6 +26,18 @@ module SolidusCardPointe
       ])
     end
 
+    initializer 'solidus_card_pointe.add_view_paths' do |_app|
+      paths = ActionController::Base.view_paths.to_a
+      index = paths.find_index { |p| p.to_s.include?('solidus_frontend') }
+
+      ActionController::Base.view_paths = paths.insert(
+        index || 0,
+        Rails::Engine.subclasses.detect { |e|
+          e.name == 'SolidusCardPointe::Engine'
+        }.root.join('app/views')
+      )
+    end
+
     class << self
       def card_pointe_credentials_hash
         {
