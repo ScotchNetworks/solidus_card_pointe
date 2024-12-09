@@ -29,5 +29,13 @@ module SolidusCardPointe
 
       gateway.void(payment.response_code, originator: payment)
     end
+
+    def reusable_sources(order)
+      return [] unless order.user
+
+      order.user.wallet.wallet_payment_sources.map(&:payment_source).select(&:reusable?).select do |source|
+        source.payment_method.is_a?(self.class)
+      end
+    end
   end
 end

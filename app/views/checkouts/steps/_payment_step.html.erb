@@ -106,6 +106,14 @@
         paymentRadios.forEach(r => toggleButtonDisabled(paymentMethodIds, r));
       });
     });
+
+    const walletPaymentRadios = document.querySelectorAll('input[name="order[wallet_payment_source_id]"]');
+
+    walletPaymentRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        walletPaymentRadios.forEach(r => toggleButtonDisabled(paymentMethodIds, r));
+      });
+    });
   };
 
   document.addEventListener('DOMContentLoaded', function() {

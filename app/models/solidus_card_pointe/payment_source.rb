@@ -6,6 +6,14 @@ module SolidusCardPointe
   class PaymentSource < SolidusSupport.payment_source_parent_class
     before_save :populate_card_details
 
+    def reusable?
+      true
+    end
+
+    def display_number
+      "#{card_token[1..2]}XX-XXXX-XXXX-#{card_last4}"
+    end
+
     private
 
     def populate_card_details
