@@ -47,6 +47,7 @@ RSpec.describe SolidusCardPointe::PaymentMethod do
     end
   end
 
+  # rubocop:disable RSpec/MultipleMemoizedHelpers
   describe '#reusable_sources' do
     let(:reusable_payment_source) {
       instance_double(SolidusCardPointe::PaymentSource, reusable?: true, payment_method: payment_method)
@@ -71,4 +72,5 @@ RSpec.describe SolidusCardPointe::PaymentMethod do
       expect(payment_method.reusable_sources(order)).to contain_exactly(reusable_payment_source)
     end
   end
+  # rubocop:enable RSpec/MultipleMemoizedHelpers
 end
