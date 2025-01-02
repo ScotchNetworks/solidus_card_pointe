@@ -46,7 +46,7 @@ const updateOrder = async (paymentMethodId, token, orderNumber, orderToken) => {
     })
     .then(response => response.json())
     .then(() => {
-        window.location.href = '/checkout/confirm';
+        window.location.href = 'confirm';
     })
     .catch((error) => {
         console.error('Error:', error);
