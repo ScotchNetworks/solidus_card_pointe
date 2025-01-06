@@ -3,7 +3,7 @@
 require_dependency 'solidus_card_pointe'
 
 module SolidusCardPointe
-  class PaymentSource < SolidusSupport.payment_source_parent_class
+  class PaymentSource < Spree::PaymentSource
     before_save :populate_card_details
 
     def reusable?
