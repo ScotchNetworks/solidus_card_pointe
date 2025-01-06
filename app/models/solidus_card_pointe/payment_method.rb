@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SolidusCardPointe
-  class PaymentMethod < SolidusSupport.payment_method_parent_class
+  class PaymentMethod < Spree::PaymentMethod
     preference :card_pointe_merchant_id, :string
     preference :card_pointe_authorization, :string
     preference :card_pointe_domain, :string
